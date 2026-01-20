@@ -16,7 +16,7 @@
 
                     <nav class="hidden lg:flex items-center gap-6 text-[11px] font-semibold">
                         <a href="{{ route('dashboard.index') }}" class="hover:text-white/90">Dashboard</a>
-                        <a href="#" class="hover:text-white/90">Profile</a>
+                        <a href="{{ route('profile.index') }}" class="hover:text-white/90">Profile</a>
                         <a href="{{ route('auth.signup') }}" class="hover:text-white/90">Sign Up</a>
                         <a href="{{ route('auth.signin') }}" class="hover:text-white/90">Sign In</a>
                     </nav>

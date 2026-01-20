@@ -20,6 +20,6 @@ Route::get('/', function () {
 // Halaman dashboard utama (UI purity)
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-// Auth pages (UI only)
+// Halaman Login (UI only)
 Route::get('/sign-in', [AuthController::class, 'signIn'])->name('auth.signin');
 Route::get('/sign-up', [AuthController::class, 'signUp'])->name('auth.signup');

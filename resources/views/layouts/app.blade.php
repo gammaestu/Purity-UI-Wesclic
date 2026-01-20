@@ -13,7 +13,7 @@
     <body class="min-h-screen bg-slate-50 font-sans text-slate-800">
         <div class="flex min-h-screen">
             {{-- Sidebar --}}
-            <aside class="w-64 bg-white border-r border-slate-100 px-6 py-8 flex flex-col">
+            <aside class="w-64 bg-white border-r border-slate-100 px-6 py-8 flex flex-col gap-6">
                 <div class="flex items-center gap-3 mb-8">
                     <div class="h-9 w-9 rounded-xl bg-sky-500 flex items-center justify-center text-white font-semibold">
                         PU
@@ -24,13 +24,13 @@
                     </div>
                 </div>
 
-                <nav class="flex-1 space-y-6 text-sm">
+                <nav class="space-y-6 text-sm">
                     <div>
                         <p class="text-xs font-semibold text-slate-400 uppercase mb-3">Pages</p>
                         <a href="{{ route('dashboard.index') }}"
                            class="flex items-center gap-3 px-3 py-2 rounded-xl bg-sky-500 text-white shadow-sm">
                             <span class="inline-flex h-6 w-6 items-center justify-center rounded-lg bg-white/10">
-                                <!-- simple dashboard icon -->
+                                <!-- dashboard icon -->
                                 <span class="h-3 w-3 rounded-sm bg-white"></span>
                             </span>
                             <span class="font-medium">Dashboard</span>
@@ -72,10 +72,13 @@
                 </nav>
 
                 {{-- Help card --}}
-                <div class="mt-8 rounded-2xl bg-sky-500 text-white px-4 py-5">
-                    <p class="text-xs font-semibold uppercase tracking-wide opacity-80 mb-1">Need help?</p>
-                    <p class="text-sm font-semibold mb-4">Please check our docs</p>
-                    <button class="w-full rounded-xl bg-white/90 text-sky-600 text-xs font-semibold py-2">
+                <div class="rounded-2xl bg-sky-400 text-white px-4 py-5 shadow-sm">
+                    <div class="mb-4 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/90 text-sky-500 font-semibold">
+                        ?
+                    </div>
+                    <p class="text-sm font-semibold leading-tight">Need help?</p>
+                    <p class="text-xs font-medium text-white/90 mb-4">Please check our docs</p>
+                    <button class="w-full rounded-xl bg-white text-slate-700 text-[11px] font-semibold py-2 shadow-[0_10px_25px_-15px_rgba(0,0,0,0.45)]">
                         DOCUMENTATION
                     </button>
                 </div>

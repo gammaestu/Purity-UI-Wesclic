@@ -12,7 +12,7 @@
     </head>
     <body class="min-h-screen bg-white font-sans text-slate-800">
         <div class="min-h-screen flex flex-col">
-            {{-- Top navbar (pill) --}}
+            {{-- Top navbar --}}
             <header class="pt-6">
                 <div class="mx-auto max-w-6xl px-6">
                     <div class="rounded-2xl bg-white shadow-sm border border-slate-100 px-6 py-4 flex items-center justify-between">

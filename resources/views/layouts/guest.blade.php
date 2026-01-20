@@ -84,7 +84,6 @@
             </footer>
         </div>
 
-        {{-- Make the navbar readable by applying a teal overlay on top area --}}
         <div class="pointer-events-none absolute inset-x-0 top-0 h-[360px] bg-emerald-400"></div>
     </body>
 </html>

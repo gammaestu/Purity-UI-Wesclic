@@ -14,66 +14,67 @@
         <div class="flex min-h-screen">
             {{-- Sidebar --}}
             <aside class="w-64 bg-white border-r border-slate-100 px-6 py-8 flex flex-col gap-6">
-                <div class="flex items-center gap-3 mb-8">
-                    <div class="h-9 w-9 rounded-xl bg-sky-500 flex items-center justify-center text-white font-semibold">
-                        PU
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="text-xs uppercase tracking-wide text-slate-400">Purity UI</span>
-                        <span class="text-sm font-semibold text-slate-800">Dashboard</span>
-                    </div>
-                </div>
+                <x-brand.purity container-class="flex items-center gap-2 mb-2" />
 
-                <nav class="space-y-6 text-sm">
+                <nav class="space-y-6">
                     <div>
                         <p class="text-xs font-semibold text-slate-400 uppercase mb-3">Pages</p>
-                        <a href="{{ route('dashboard.index') }}"
-                           class="flex items-center gap-3 px-3 py-2 rounded-xl bg-sky-500 text-white shadow-sm">
-                            <span class="inline-flex h-6 w-6 items-center justify-center rounded-lg bg-white/10">
-                                <!-- dashboard icon -->
-                                <span class="h-3 w-3 rounded-sm bg-white"></span>
-                            </span>
-                            <span class="font-medium">Dashboard</span>
-                        </a>
-                        <div class="mt-1 space-y-1">
-                            <button type="button" class="flex w-full items-center gap-3 px-3 py-2 rounded-xl text-slate-500 hover:bg-slate-50">
-                                <span class="h-6 w-6 rounded-lg bg-slate-100"></span>
-                                <span>Tables</span>
-                            </button>
-                            <button type="button" class="flex w-full items-center gap-3 px-3 py-2 rounded-xl text-slate-500 hover:bg-slate-50">
-                                <span class="h-6 w-6 rounded-lg bg-slate-100"></span>
-                                <span>Billing</span>
-                            </button>
-                            <button type="button" class="flex w-full items-center gap-3 px-3 py-2 rounded-xl text-slate-500 hover:bg-slate-50">
-                                <span class="h-6 w-6 rounded-lg bg-slate-100"></span>
-                                <span>RTL</span>
-                            </button>
+
+                        <x-sidebar.nav-item :href="route('dashboard.index')" label="Dashboard" :active="request()->routeIs('dashboard.index')">
+                            <x-slot:icon>
+                                <x-icons.dashboard class="h-5 w-5"/>
+                            </x-slot:icon>
+                        </x-sidebar.nav-item>
+
+                        <div class="mt-3 space-y-3">
+                            <x-sidebar.nav-item :href="route('tables.index')" label="Tables" :active="request()->routeIs('tables.index')">
+                                <x-slot:icon>
+                                    <x-icons.chart-bar class="h-5 w-5"/>
+                                </x-slot:icon>
+                            </x-sidebar.nav-item>
+
+                            <x-sidebar.nav-item :href="route('billing.index')" label="Billing" :active="request()->routeIs('billing.index')">
+                                <x-slot:icon>
+                                    <x-icons.credit-card class="h-5 w-5"/>
+                                </x-slot:icon>
+                            </x-sidebar.nav-item>
+
+                            <x-sidebar.nav-item href="#" label="RTL" :active="false">
+                                <x-slot:icon>
+                                    <x-icons.rtl class="h-5 w-5"/>
+                                </x-slot:icon>
+                            </x-sidebar.nav-item>
                         </div>
                     </div>
 
                     <div>
                         <p class="text-xs font-semibold text-slate-400 uppercase mb-3">Account pages</p>
-                        <div class="space-y-1">
-                            <button type="button" class="flex w-full items-center gap-3 px-3 py-2 rounded-xl text-slate-500 hover:bg-slate-50">
-                                <span class="h-6 w-6 rounded-lg bg-slate-100"></span>
-                                <span>Profile</span>
-                            </button>
-                            <a href="{{ route('auth.signin') }}" class="flex w-full items-center gap-3 px-3 py-2 rounded-xl text-slate-500 hover:bg-slate-50">
-                                <span class="h-6 w-6 rounded-lg bg-slate-100"></span>
-                                <span>Sign In</span>
-                            </a>
-                            <a href="{{ route('auth.signup') }}" class="flex w-full items-center gap-3 px-3 py-2 rounded-xl text-slate-500 hover:bg-slate-50">
-                                <span class="h-6 w-6 rounded-lg bg-slate-100"></span>
-                                <span>Sign Up</span>
-                            </a>
+                        <div class="space-y-3">
+                            <x-sidebar.nav-item :href="route('profile.index')" label="Profile" :active="request()->routeIs('profile.index')">
+                                <x-slot:icon>
+                                    <x-icons.user class="h-5 w-5"/>
+                                </x-slot:icon>
+                            </x-sidebar.nav-item>
+
+                            <x-sidebar.nav-item :href="route('auth.signin')" label="Sign In" :active="request()->routeIs('auth.signin')">
+                                <x-slot:icon>
+                                    <x-icons.document class="h-5 w-5"/>
+                                </x-slot:icon>
+                            </x-sidebar.nav-item>
+
+                            <x-sidebar.nav-item :href="route('auth.signup')" label="Sign Up" :active="request()->routeIs('auth.signup')">
+                                <x-slot:icon>
+                                    <x-icons.rocket class="h-5 w-5"/>
+                                </x-slot:icon>
+                            </x-sidebar.nav-item>
                         </div>
                     </div>
 
                 </nav>
 
                 {{-- Help card --}}
-                <div class="rounded-2xl bg-sky-400 text-white px-4 py-5 shadow-sm">
-                    <div class="mb-4 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/90 text-sky-500 font-semibold">
+                <div class="rounded-2xl bg-[#4FD1C5] text-white px-4 py-5 shadow-sm">
+                    <div class="mb-4 inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/90 text-[#4FD1C5] font-semibold">
                         ?
                     </div>
                     <p class="text-sm font-semibold leading-tight">Need help?</p>
@@ -89,21 +90,34 @@
                 {{-- Top bar --}}
                 <header class="px-8 pt-6 pb-4 flex items-center justify-between">
                     <div>
-                        <p class="text-xs text-slate-400 mb-1">Pages / Dashboard</p>
-                        <h1 class="text-xl font-semibold text-slate-800">Dashboard</h1>
+                        <p class="text-xs text-slate-400 mb-1">@yield('breadcrumb', 'Pages / Dashboard')</p>
+                        <h1 class="text-xl font-semibold text-slate-800">@yield('page_heading', 'Dashboard')</h1>
                     </div>
                     <div class="flex items-center gap-3">
                         <div class="relative">
-                            <span class="absolute inset-y-0 left-3 flex items-center text-slate-400 text-xs">
-                                🔍
+                            <span class="absolute inset-y-0 left-3 flex items-center text-slate-400">
+                                <x-icons.search class="h-4 w-4" />
                             </span>
                             <input
                                 type="text"
                                 placeholder="Type here..."
-                                class="h-9 w-56 rounded-full border border-slate-200 bg-slate-50 pl-8 pr-3 text-xs outline-none focus:border-sky-400 focus:bg-white"
+                                class="h-9 w-56 rounded-full border border-slate-200 bg-slate-50 pl-8 pr-3 text-xs outline-none focus:border-[#4FD1C5] focus:bg-white"
                             />
                         </div>
-                        <a href="{{ route('auth.signin') }}" class="text-xs text-slate-500 hover:text-slate-700">Sign In</a>
+                        <div class="flex items-center gap-3 pl-1">
+                            <a href="{{ route('auth.signin') }}" class="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 hover:text-slate-800">
+                                <x-icons.user class="h-4 w-4 text-slate-500" />
+                                <span>Sign In</span>
+                            </a>
+
+                            <button type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100">
+                                <x-icons.settings class="h-5 w-5" />
+                            </button>
+
+                            <button type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100">
+                                <x-icons.bell class="h-5 w-5" />
+                            </button>
+                        </div>
                     </div>
                 </header>
 
@@ -111,13 +125,17 @@
                     @yield('content')
                 </main>
 
-                <footer class="px-8 py-4 border-t border-slate-100 text-xs text-slate-400 flex justify-between">
-                    <span>© 2026, made with ♥ by Creative Tim &amp; Simmmple</span>
+                <footer class="px-8 py-4 border-t border-slate-100 text-xs text-slate-400 flex items-center justify-between">
+                    <span>
+                        @ 2026, Made with
+                        <span class="mx-1 text-rose-500">♥</span>
+                        by
+                        <span class="font-semibold text-[#4FD1C5]">Gamma Estu Mahardika</span>
+                    </span>
                     <div class="space-x-4">
-                        <button class="hover:text-slate-600">Creative Tim</button>
-                        <button class="hover:text-slate-600">Simmmple</button>
-                        <button class="hover:text-slate-600">Blog</button>
-                        <button class="hover:text-slate-600">License</button>
+                        <button class="hover:text-slate-600">Dashboard UI</button>
+                        <button class="hover:text-slate-600">Tailwind</button>
+                        <button class="hover:text-slate-600">Laravel</button>
                     </div>
                 </footer>
             </div>

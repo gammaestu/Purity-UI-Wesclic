@@ -16,11 +16,8 @@
             <header class="w-full pt-6">
                 <div class="mx-auto max-w-6xl px-6">
                     <div class="flex items-center justify-between">
-                        <a href="{{ route('dashboard.index') }}" class="flex items-center gap-3">
-                            <span class="h-9 w-9 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center text-white font-semibold">
-                                PU
-                            </span>
-                            <span class="text-sm font-semibold text-white tracking-wide">PURITY UI DASHBOARD</span>
+                        <a href="{{ route('dashboard.index') }}" class="flex items-center gap-2">
+                            <x-brand.purity :invert="true" />
                         </a>
 
                         <nav class="hidden md:flex items-center gap-8 text-xs font-semibold text-white/90">
@@ -40,7 +37,7 @@
             {{-- Hero background --}}
             <section class="relative mt-6">
                 <div class="mx-auto max-w-6xl px-6">
-                    <div class="relative overflow-hidden rounded-2xl h-[280px] bg-emerald-400">
+                    <div class="relative overflow-hidden rounded-2xl h-[280px] bg-[#4FD1C5]">
                         <div class="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.5),transparent_55%),radial-gradient(circle_at_70%_40%,rgba(255,255,255,0.35),transparent_60%),radial-gradient(circle_at_40%_90%,rgba(255,255,255,0.25),transparent_50%)]"></div>
                         <div class="absolute inset-0 opacity-35 bg-[linear-gradient(110deg,rgba(255,255,255,0.28),transparent_40%,rgba(255,255,255,0.18))]"></div>
                         <div class="absolute -right-24 -top-10 h-[420px] w-[420px] rounded-full bg-white/10 blur-2xl"></div>
@@ -84,7 +81,7 @@
             </footer>
         </div>
 
-        <div class="pointer-events-none absolute inset-x-0 top-0 h-[360px] bg-emerald-400"></div>
+        <div class="pointer-events-none absolute inset-x-0 top-0 h-[360px] bg-[#4FD1C5]"></div>
     </body>
 </html>
 

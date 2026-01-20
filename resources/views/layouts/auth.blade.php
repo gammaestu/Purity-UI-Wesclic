@@ -12,60 +12,66 @@
     </head>
     <body class="min-h-screen bg-white font-sans text-slate-800">
         <div class="min-h-screen flex flex-col">
-            {{-- Top navbar --}}
-            <header class="pt-6">
-                <div class="mx-auto max-w-6xl px-6">
-                    <div class="rounded-2xl bg-white shadow-sm border border-slate-100 px-6 py-4 flex items-center justify-between">
-                        <a href="{{ route('dashboard.index') }}" class="flex items-center gap-3">
-                            <span class="h-8 w-8 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-700 font-semibold">
-                                PU
-                            </span>
-                            <span class="text-xs font-semibold text-slate-700 tracking-wide">PURITY UI DASHBOARD</span>
-                        </a>
+            {{-- Header + content wrapper (biar panel kanan bisa naik sampai atas dan "di belakang" navbar) --}}
+            <div class="relative flex-1">
+                {{-- Right teal panel as background layer --}}
+                {{-- Panel kanan mulai tepat dari tengah layar dan mengisi seluruh sisi kanan --}}
+                <div class="pointer-events-none absolute inset-y-0 left-1/2 right-0 hidden lg:block">
+                    <div class="absolute inset-y-6 left-0 right-6 overflow-hidden rounded-l-3xl bg-[#4FD1C5] shadow-[0_30px_60px_rgba(15,118,110,0.25)]">
+                        {{-- Wave / vector background (mendekati desain asli) --}}
+                        <div class="absolute inset-0 opacity-45 bg-[radial-gradient(circle_at_10%_10%,rgba(255,255,255,0.60),transparent_55%),radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.45),transparent_60%),radial-gradient(circle_at_30%_90%,rgba(255,255,255,0.35),transparent_55%)]"></div>
+                        <div class="absolute inset-0 opacity-35 bg-[linear-gradient(115deg,rgba(255,255,255,0.4),transparent_40%,rgba(255,255,255,0.25))]"></div>
+                        <div class="absolute inset-0 opacity-30 bg-[repeating-linear-gradient(140deg,rgba(255,255,255,0.30)_0px,rgba(255,255,255,0.30)_1px,transparent_1px,transparent_9px)]"></div>
 
-                        <nav class="hidden md:flex items-center gap-8 text-[11px] font-semibold text-slate-500">
-                            <a href="{{ route('dashboard.index') }}" class="hover:text-slate-700">Dashboard</a>
-                            <a href="#" class="hover:text-slate-700">Profile</a>
-                            <a href="{{ route('auth.signup') }}" class="hover:text-slate-700">Sign Up</a>
-                            <a href="{{ route('auth.signin') }}" class="hover:text-slate-700">Sign In</a>
-                        </nav>
-
-                        <a href="#" class="rounded-full bg-slate-800 text-white text-[11px] font-semibold px-5 py-2 shadow-sm hover:bg-slate-900">
-                            Free Download
-                        </a>
+                        {{-- Logo chakra + petir di tengah panel --}}
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <img
+                                src="{{ asset('build/assets/images/logochakra.png') }}"
+                                alt="Chakra logo"
+                                class="w-[380px] max-w-[72%] drop-shadow-[0_24px_40px_rgba(15,118,110,0.45)]"
+                            >
+                        </div>
                     </div>
                 </div>
-            </header>
 
-            {{-- Split content --}}
-            <main class="flex-1">
-                <div class="mx-auto max-w-6xl px-6 py-10">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                        {{-- Left content --}}
-                        <div class="flex justify-center lg:justify-start">
-                            @yield('content')
+                {{-- Top navbar --}}
+                <header class="relative z-20 pt-6">
+                    <div class="mx-auto max-w-6xl px-6">
+                        {{-- Navbar pill --}}
+                        <div class="h-[64px] rounded-[40px] bg-white shadow-[0_18px_35px_rgba(15,23,42,0.08)] border border-slate-100 pl-8 pr-10 flex items-center justify-between">
+                            <a href="{{ route('dashboard.index') }}" class="flex items-center gap-2">
+                                <x-brand.purity />
+                            </a>
+
+                            <nav class="hidden md:flex items-center gap-8 text-[11px] font-semibold leading-none text-slate-500">
+                                <a href="{{ route('dashboard.index') }}" class="hover:text-slate-700">Dashboard</a>
+                                <a href="{{ route('profile.index') }}" class="hover:text-slate-700">Profile</a>
+                                <a href="{{ route('auth.signup') }}" class="hover:text-slate-700">Sign Up</a>
+                                <a href="{{ route('auth.signin') }}" class="hover:text-slate-700">Sign In</a>
+                            </nav>
+
+                            <a href="#" class="flex h-9 items-center rounded-full bg-slate-800 text-white text-[11px] font-semibold px-5 shadow-sm hover:bg-slate-900">
+                                Free Download
+                            </a>
                         </div>
+                    </div>
+                </header>
 
-                        {{-- Right teal panel --}}
-                        <div class="hidden lg:block">
-                            <div class="relative overflow-hidden rounded-3xl h-[560px] bg-emerald-400">
-                                <div class="absolute inset-0 opacity-35 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.5),transparent_55%),radial-gradient(circle_at_70%_40%,rgba(255,255,255,0.35),transparent_60%),radial-gradient(circle_at_40%_90%,rgba(255,255,255,0.25),transparent_50%)]"></div>
-                                <div class="absolute inset-0 opacity-35 bg-[linear-gradient(110deg,rgba(255,255,255,0.28),transparent_40%,rgba(255,255,255,0.18))]"></div>
-                                <div class="absolute inset-0 opacity-25 bg-[repeating-linear-gradient(135deg,rgba(255,255,255,0.20)_0px,rgba(255,255,255,0.20)_1px,transparent_1px,transparent_7px)]"></div>
-
-                                <div class="absolute inset-0 flex items-center justify-center">
-                                    <div class="flex items-center gap-6 text-white">
-                                        <div class="h-20 w-20 rounded-full bg-white/20 flex items-center justify-center">
-                                            <span class="text-4xl font-semibold">⚡</span>
-                                        </div>
-                                        <span class="text-6xl font-semibold tracking-tight">chakra</span>
-                                    </div>
-                                </div>
+                {{-- Split content --}}
+                <main class="relative z-10">
+                    <div class="mx-auto max-w-6xl px-6 py-10">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                            {{-- Left content --}}
+                            <div class="flex justify-center lg:justify-start">
+                                @yield('content')
                             </div>
+
+                            {{-- Spacer column (panel kanan ada di background absolute) --}}
+                            <div class="hidden lg:block"></div>
                         </div>
                     </div>
-                </div>
-            </main>
+                </main>
+            </div>
 
             <footer class="pb-8">
                 <div class="mx-auto max-w-6xl px-6 text-xs text-slate-400 flex items-center justify-between">

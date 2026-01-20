@@ -5,19 +5,14 @@
 @section('body')
     <div class="min-h-screen bg-white text-slate-700 flex flex-col">
         {{-- Hero with navbar --}}
-        <div class="relative overflow-hidden bg-emerald-400 pb-44">
+        <div class="relative overflow-hidden bg-[#4FD1C5] pb-44">
             <div class="absolute inset-0 opacity-35 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.5),transparent_55%),radial-gradient(circle_at_70%_40%,rgba(255,255,255,0.35),transparent_60%),radial-gradient(circle_at_40%_90%,rgba(255,255,255,0.25),transparent_50%)]"></div>
             <div class="absolute inset-0 opacity-30 bg-[linear-gradient(115deg,rgba(255,255,255,0.4),transparent_40%,rgba(255,255,255,0.3))]"></div>
             <div class="absolute inset-0 opacity-35 bg-[repeating-linear-gradient(135deg,rgba(255,255,255,0.22)_0px,rgba(255,255,255,0.22)_1px,transparent_1px,transparent_7px)]"></div>
 
             <div class="relative mx-auto max-w-6xl px-6 pt-8">
                 <div class="flex items-center justify-between text-white">
-                    <div class="flex items-center gap-2 text-sm font-semibold tracking-wide">
-                        <div class="h-8 w-8 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center text-xs">
-                            PU
-                        </div>
-                        <span>PURITY UI DASHBOARD</span>
-                    </div>
+                    <x-brand.purity :invert="true" text-class="text-sm font-semibold tracking-wide" />
 
                     <nav class="hidden lg:flex items-center gap-6 text-[11px] font-semibold">
                         <a href="{{ route('dashboard.index') }}" class="hover:text-white/90">Dashboard</a>
@@ -26,7 +21,7 @@
                         <a href="{{ route('auth.signin') }}" class="hover:text-white/90">Sign In</a>
                     </nav>
 
-                    <a href="#" class="rounded-full bg-white text-emerald-500 text-[11px] font-semibold px-5 py-2 shadow-sm hover:bg-white/90">
+                    <a href="#" class="rounded-full bg-white text-[#4FD1C5] text-[11px] font-semibold px-5 py-2 shadow-sm hover:bg-white/90">
                         Free Download
                     </a>
                 </div>
@@ -73,7 +68,7 @@
                         <input
                             type="text"
                             placeholder="Your full name"
-                            class="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-xs text-slate-700 placeholder:text-slate-300 outline-none focus:border-emerald-400"
+                            class="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-xs text-slate-700 placeholder:text-slate-300 outline-none focus:border-[#4FD1C5]"
                         />
                     </div>
 
@@ -82,7 +77,7 @@
                         <input
                             type="email"
                             placeholder="Your email address"
-                            class="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-xs text-slate-700 placeholder:text-slate-300 outline-none focus:border-emerald-400"
+                            class="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-xs text-slate-700 placeholder:text-slate-300 outline-none focus:border-[#4FD1C5]"
                         />
                     </div>
 
@@ -91,25 +86,25 @@
                         <input
                             type="password"
                             placeholder="Your password"
-                            class="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-xs text-slate-700 placeholder:text-slate-300 outline-none focus:border-emerald-400"
+                            class="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-xs text-slate-700 placeholder:text-slate-300 outline-none focus:border-[#4FD1C5]"
                         />
                     </div>
 
                     <label class="flex items-center gap-3 pt-1 cursor-pointer select-none">
-                        <span class="relative inline-flex h-5 w-10 items-center rounded-full bg-emerald-400 shadow-inner">
+                        <span class="relative inline-flex h-5 w-10 items-center rounded-full bg-[#4FD1C5] shadow-inner">
                             <input type="checkbox" class="peer sr-only" checked>
                             <span class="absolute left-0.5 top-0.5 h-4 w-4 rounded-full bg-white shadow-sm transition peer-checked:translate-x-5"></span>
                         </span>
                         <span class="text-[11px] text-slate-500">Remember me</span>
                     </label>
 
-                    <button type="button" class="w-full rounded-xl bg-emerald-400 text-white text-xs font-semibold py-3 tracking-wide shadow-sm hover:bg-emerald-500">
+                    <button type="button" class="w-full rounded-xl bg-[#4FD1C5] text-white text-xs font-semibold py-3 tracking-wide shadow-sm hover:brightness-95">
                         SIGN UP
                     </button>
 
                     <p class="text-center text-[11px] text-slate-400 pt-1">
                         Already have an account?
-                        <a href="{{ route('auth.signin') }}" class="text-emerald-400 font-semibold hover:text-emerald-500">Sign in</a>
+                        <a href="{{ route('auth.signin') }}" class="text-[#4FD1C5] font-semibold hover:brightness-95">Sign in</a>
                     </p>
                 </form>
             </div>

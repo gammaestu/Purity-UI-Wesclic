@@ -12,18 +12,17 @@
     </head>
     <body class="min-h-screen bg-white font-sans text-slate-800">
         <div class="min-h-screen flex flex-col">
-            {{-- Header + content wrapper (biar panel kanan bisa naik sampai atas dan "di belakang" navbar) --}}
+            {{-- Header + content wrapper --}}
             <div class="relative flex-1">
                 {{-- Right teal panel as background layer --}}
-                {{-- Panel kanan mulai tepat dari tengah layar dan mengisi seluruh sisi kanan --}}
                 <div class="pointer-events-none absolute inset-y-0 left-1/2 right-0 hidden lg:block">
                     <div class="absolute inset-y-6 left-0 right-6 overflow-hidden rounded-l-3xl bg-[#4FD1C5] shadow-[0_30px_60px_rgba(15,118,110,0.25)]">
-                        {{-- Wave / vector background (mendekati desain asli) --}}
+                        {{-- Wave / vector background --}}
                         <div class="absolute inset-0 opacity-45 bg-[radial-gradient(circle_at_10%_10%,rgba(255,255,255,0.60),transparent_55%),radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.45),transparent_60%),radial-gradient(circle_at_30%_90%,rgba(255,255,255,0.35),transparent_55%)]"></div>
                         <div class="absolute inset-0 opacity-35 bg-[linear-gradient(115deg,rgba(255,255,255,0.4),transparent_40%,rgba(255,255,255,0.25))]"></div>
                         <div class="absolute inset-0 opacity-30 bg-[repeating-linear-gradient(140deg,rgba(255,255,255,0.30)_0px,rgba(255,255,255,0.30)_1px,transparent_1px,transparent_9px)]"></div>
 
-                        {{-- Logo chakra + petir di tengah panel --}}
+                        {{-- Logo chakra --}}
                         <div class="absolute inset-0 flex items-center justify-center">
                             <img
                                 src="{{ asset('build/assets/images/logochakra.png') }}"
@@ -75,12 +74,15 @@
 
             <footer class="pb-8">
                 <div class="mx-auto max-w-6xl px-6 text-xs text-slate-400 flex items-center justify-between">
-                    <span>© 2021, Made with ♥ by Creative Tim &amp; Simmmple for a better web</span>
+                    <span>
+                        © 2026, Made with
+                        <span class="mx-1 text-rose-500">♥</span>
+                        by
+                        <span class="font-semibold text-[#4FD1C5]">Gamma Estu Mahardika</span>
+                    </span>
                     <div class="space-x-6">
-                        <a href="#" class="hover:text-slate-600">Creative Tim</a>
-                        <a href="#" class="hover:text-slate-600">Simmmple</a>
-                        <a href="#" class="hover:text-slate-600">Blog</a>
-                        <a href="#" class="hover:text-slate-600">License</a>
+                        <a href="{{ route('dashboard.index') }}" class="hover:text-slate-600">Dashboard</a>
+                        <a href="{{ route('profile.index') }}" class="hover:text-slate-600">Profile</a>
                     </div>
                 </div>
             </footer>

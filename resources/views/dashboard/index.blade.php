@@ -32,9 +32,9 @@
         {{-- New Clients --}}
         <div class="rounded-2xl bg-white shadow-sm border border-slate-100 px-5 py-4 flex items-center justify-between">
             <div>
-                <p class="text-xs font-semibold text-slate-400 mb-1">New Clients</p>
-                <p class="text-lg font-semibold text-slate-800 leading-tight">+3,052</p>
-                <span class="text-[11px] font-semibold text-rose-500">-14%</span>
+                <p class="text-xs font-semibold text-slate-400 mb-1">{{ $newClients->label ?? 'New Clients' }}</p>
+                <p class="text-lg font-semibold text-slate-800 leading-tight">+{{ number_format($newClients->value ?? 3052, 0) }}</p>
+                <span class="text-[11px] font-semibold {{ ($newClients->change_type ?? 'negative') === 'positive' ? 'text-[#4FD1C5]' : 'text-rose-500' }}">{{ $newClients->change_percentage ?? '-14%' }}</span>
             </div>
             <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#4FD1C5] text-white shadow-sm">
                 <x-icons.document class="h-5 w-5" />
@@ -44,9 +44,9 @@
         {{-- Total Sales --}}
         <div class="rounded-2xl bg-white shadow-sm border border-slate-100 px-5 py-4 flex items-center justify-between">
             <div>
-                <p class="text-xs font-semibold text-slate-400 mb-1">Total Sales</p>
-                <p class="text-lg font-semibold text-slate-800 leading-tight">$173,000</p>
-                <span class="text-[11px] font-semibold text-[#4FD1C5]">+8%</span>
+                <p class="text-xs font-semibold text-slate-400 mb-1">{{ $totalSales->label ?? 'Total Sales' }}</p>
+                <p class="text-lg font-semibold text-slate-800 leading-tight">${{ number_format($totalSales->value ?? 173000, 0) }}</p>
+                <span class="text-[11px] font-semibold {{ ($totalSales->change_type ?? 'positive') === 'positive' ? 'text-[#4FD1C5]' : 'text-rose-500' }}">{{ $totalSales->change_percentage ?? '+8%' }}</span>
             </div>
             <div class="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#4FD1C5] text-white shadow-sm">
                 <x-icons.cart class="h-5 w-5" />
@@ -107,7 +107,7 @@
                         <x-icons.wallet class="h-4 w-4" />
                     </div>
                     <p class="text-[11px] text-slate-400 mb-1">Users</p>
-                    <p class="font-semibold text-slate-800 text-sm mb-2">32,984</p>
+                    <p class="font-semibold text-slate-800 text-sm mb-2">{{ number_format($activeUsers->value ?? 32984, 0) }}</p>
                     <div class="h-1 w-full rounded-full bg-slate-100 overflow-hidden">
                         <div class="h-full rounded-full bg-[#4FD1C5]" style="width: 70%"></div>
                     </div>
@@ -119,7 +119,7 @@
                         <x-icons.rocket class="h-4 w-4" />
                     </div>
                     <p class="text-[11px] text-slate-400 mb-1">Clicks</p>
-                    <p class="font-semibold text-slate-800 text-sm mb-2">2,42m</p>
+                    <p class="font-semibold text-slate-800 text-sm mb-2">{{ $clicks ? number_format($clicks->value / 1000000, 2) . 'm' : '2.42m' }}</p>
                     <div class="h-1 w-full rounded-full bg-slate-100 overflow-hidden">
                         <div class="h-full rounded-full bg-[#4FD1C5]" style="width: 80%"></div>
                     </div>
@@ -131,7 +131,7 @@
                         <x-icons.cart class="h-4 w-4" />
                     </div>
                     <p class="text-[11px] text-slate-400 mb-1">Sales</p>
-                    <p class="font-semibold text-slate-800 text-sm mb-2">2,400$</p>
+                    <p class="font-semibold text-slate-800 text-sm mb-2">${{ number_format($sales->value ?? 2400, 0) }}</p>
                     <div class="h-1 w-full rounded-full bg-slate-100 overflow-hidden">
                         <div class="h-full rounded-full bg-[#4FD1C5]" style="width: 60%"></div>
                     </div>
@@ -143,7 +143,7 @@
                         <x-icons.wrench class="h-4 w-4" />
                     </div>
                     <p class="text-[11px] text-slate-400 mb-1">Items</p>
-                    <p class="font-semibold text-slate-800 text-sm mb-2">320</p>
+                    <p class="font-semibold text-slate-800 text-sm mb-2">{{ number_format($items->value ?? 320, 0) }}</p>
                     <div class="h-1 w-full rounded-full bg-slate-100 overflow-hidden">
                         <div class="h-full rounded-full bg-[#4FD1C5]" style="width: 90%"></div>
                     </div>
@@ -191,42 +191,32 @@
                         </tr>
                     </thead>
                     <tbody class="text-[13px]">
-                        @php
-                            $projects = [
-                                ['name' => 'Chakra Soft UI Version', 'logo' => asset('images/projects/xd.svg'), 'budget' => '$14,000', 'completion' => 60],
-                                ['name' => 'Add Progress Track', 'logo' => asset('images/projects/atlassian.svg'), 'budget' => '$3,000', 'completion' => 10],
-                                ['name' => 'Fix Platform Errors', 'logo' => asset('images/projects/slack.svg'), 'budget' => 'Not set', 'completion' => 100],
-                                ['name' => 'Launch our Mobile App', 'logo' => asset('images/projects/spotify.svg'), 'budget' => '$32,000', 'completion' => 100],
-                                ['name' => 'Add the New Pricing Page', 'logo' => asset('images/projects/atlassian.svg'), 'budget' => '$400', 'completion' => 25],
-                                ['name' => 'Redesign New Online Shop', 'logo' => asset('images/projects/shopify.svg'), 'budget' => '$7,600', 'completion' => 40],
-                            ];
-                        @endphp
                         @foreach ($projects as $project)
                             <tr class="border-b border-slate-50 last:border-0">
                                 <td class="py-3">
                                     <div class="flex items-center gap-3">
                                         <img
-                                            src="{{ $project['logo'] }}"
+                                            src="{{ $project->logo }}"
                                             alt=""
                                             class="h-8 w-8 rounded-xl shadow-sm ring-1 ring-slate-100 bg-white"
                                         >
-                                        <span class="font-medium text-slate-700">{{ $project['name'] }}</span>
+                                        <span class="font-medium text-slate-700">{{ $project->name }}</span>
                                     </div>
                                 </td>
                                 <td class="py-3">
                                     <div class="flex -space-x-1.5">
-                                        @for ($i = 0; $i < 4; $i++)
+                                        @for ($i = 0; $i < $project->members_count; $i++)
                                             <span class="h-6 w-6 rounded-full border-2 border-white bg-slate-200"></span>
                                         @endfor
                                     </div>
                                 </td>
-                                <td class="py-3 text-slate-600">{{ $project['budget'] }}</td>
+                                <td class="py-3 text-slate-600">{{ $project->budget }}</td>
                                 <td class="py-3">
                                     <div class="flex items-center gap-3">
                                         <div class="flex-1 h-1.5 rounded-full bg-slate-100 overflow-hidden">
-                                            <div class="h-full rounded-full bg-[#4FD1C5]" style="width: {{ $project['completion'] }}%"></div>
+                                            <div class="h-full rounded-full bg-[#4FD1C5]" style="width: {{ $project->completion }}%"></div>
                                         </div>
-                                        <span class="text-xs font-semibold text-slate-600">{{ $project['completion'] }}%</span>
+                                        <span class="text-xs font-semibold text-slate-600">{{ $project->completion }}%</span>
                                     </div>
                                 </td>
                             </tr>
@@ -247,20 +237,10 @@
             <div class="mt-4 text-xs relative pl-12">
                 {{-- vertical line (centered with the icon) --}}
                 <div class="absolute left-4 top-1 bottom-1 border-l-2 border-slate-100"></div>
-                @php
-                    $orders = [
-                        ['color' => 'text-[#4FD1C5]', 'type' => 'bell', 'title' => '$2400, Design changes', 'time' => '22 DEC 7:20 PM'],
-                        ['color' => 'text-rose-500', 'type' => 'html', 'title' => 'New order #4219423', 'time' => '21 DEC 11:21 PM'],
-                        ['color' => 'text-[#4FD1C5]', 'type' => 'cart', 'title' => 'Server Payments for April', 'time' => '21 DEC 9:28 PM'],
-                        ['color' => 'text-amber-400', 'type' => 'card', 'title' => 'New card added for order #3210145', 'time' => '20 DEC 3:52 PM'],
-                        ['color' => 'text-slate-800', 'type' => 'box', 'title' => 'Unlock packages for Development', 'time' => '19 DEC 11:35 PM'],
-                        ['color' => 'text-purple-500', 'type' => 'xd', 'title' => 'New order #9851258', 'time' => '18 DEC 4:41 PM'],
-                    ];
-                @endphp
                 @foreach ($orders as $order)
                     <div class="relative flex items-start gap-4 pb-5 last:pb-0">
-                        <span class="relative z-10 mt-0.5 inline-flex h-8 w-8 items-center justify-center {{ $order['color'] }}">
-                            @switch($order['type'])
+                        <span class="relative z-10 mt-0.5 inline-flex h-8 w-8 items-center justify-center {{ $order->color }}">
+                            @switch($order->type)
                                 @case('bell')
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-5 w-5 fill-current">
                                         <path d="M12 22a2.5 2.5 0 0 0 2.45-2H9.55A2.5 2.5 0 0 0 12 22Zm7-6V11a7 7 0 1 0-14 0v5l-2 2v1h18v-1l-2-2Z"/>
@@ -292,8 +272,8 @@
                             @endswitch
                         </span>
                         <div class="flex-1">
-                            <p class="text-slate-800 text-[13px] font-semibold leading-tight">{{ $order['title'] }}</p>
-                            <p class="text-[11px] text-slate-400 uppercase tracking-wide mt-1">{{ $order['time'] }}</p>
+                            <p class="text-slate-800 text-[13px] font-semibold leading-tight">{{ $order->title }}</p>
+                            <p class="text-[11px] text-slate-400 uppercase tracking-wide mt-1">{{ $order->order_date->format('d M Y, h:i A') }}</p>
                         </div>
                     </div>
                 @endforeach

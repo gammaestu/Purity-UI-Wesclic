@@ -5,34 +5,6 @@
 @section('page_heading', 'Billing')
 
 @section('content')
-    @php
-        $invoices = [
-            ['date' => 'March, 01, 2020', 'id' => '#MS-415646', 'amount' => '$180'],
-            ['date' => 'February, 10, 2021', 'id' => '#RV-126749', 'amount' => '$250'],
-            ['date' => 'April, 05, 2020', 'id' => '#QW-103578', 'amount' => '$120'],
-            ['date' => 'June, 25, 2019', 'id' => '#FB-212562', 'amount' => '$145'],
-            ['date' => 'March, 01, 2019', 'id' => '#AR-803481', 'amount' => '$300'],
-        ];
-
-        $billingInfos = [
-            ['name' => 'Oliver Liam', 'company' => 'Viking Burrito', 'email' => 'oliver@burrito.com', 'vat' => 'FRB1235476'],
-            ['name' => 'Lucas Harper', 'company' => 'Stone Tech Zone', 'email' => 'lucas@stone.com', 'vat' => 'FRB1235476'],
-            ['name' => 'Ethan James', 'company' => 'Fiber Notion', 'email' => 'ethan@fiber.com', 'vat' => 'FRB1235476'],
-        ];
-
-        $transactions = [
-            'Newest' => [
-                ['name' => 'Netflix', 'date' => '27 March 2020, at 12:30 PM', 'amount' => '- $2,500', 'negative' => true],
-                ['name' => 'Apple', 'date' => '27 March 2020, at 04:30 AM', 'amount' => '+ $2,000', 'negative' => false],
-            ],
-            'Yesterday' => [
-                ['name' => 'Stripe', 'date' => '26 March 2020, at 13:45 PM', 'amount' => '+ $750', 'negative' => false],
-                ['name' => 'HubSpot', 'date' => '26 March 2020, at 12:30 PM', 'amount' => '+ $1,050', 'negative' => false],
-                ['name' => 'Webflow', 'date' => '26 March 2020, at 05:00 AM', 'amount' => '- $400', 'negative' => true],
-            ],
-        ];
-    @endphp
-
     <div class="space-y-6">
         {{-- Top area (match reference): Card + Salary + Paypal + Invoices (Invoices spans 2 rows) --}}
         <div class="grid grid-cols-1 xl:grid-cols-5 gap-6">
@@ -99,11 +71,11 @@
                     @foreach ($invoices as $invoice)
                         <div class="flex items-center justify-between border-b border-slate-50 pb-2 last:border-0 last:pb-0">
                             <div>
-                                <p class="font-semibold text-slate-700">{{ $invoice['date'] }}</p>
-                                <p class="text-[11px] text-slate-400">{{ $invoice['id'] }}</p>
+                                <p class="font-semibold text-slate-700">{{ $invoice->invoice_date->format('F, d, Y') }}</p>
+                                <p class="text-[11px] text-slate-400">{{ $invoice->invoice_number }}</p>
                             </div>
                             <div class="flex items-center gap-4">
-                                <span class="font-semibold text-slate-700">{{ $invoice['amount'] }}</span>
+                                <span class="font-semibold text-slate-700">${{ number_format($invoice->amount, 0) }}</span>
                                 <button class="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-500 hover:text-slate-700">
                                     <x-icons.pdf class="h-3 w-3 text-slate-500" />
                                     <span>PDF</span>
@@ -162,18 +134,18 @@
                     @foreach ($billingInfos as $info)
                         <div class="rounded-2xl border border-slate-100 px-4 py-4 flex items-start justify-between">
                             <div>
-                                <p class="text-sm font-semibold text-slate-800 mb-1">{{ $info['name'] }}</p>
+                                <p class="text-sm font-semibold text-slate-800 mb-1">{{ $info->name }}</p>
                                 <p class="text-[11px] text-slate-400 mb-0.5">
                                     Company Name:
-                                    <span class="font-semibold text-slate-600">{{ $info['company'] }}</span>
+                                    <span class="font-semibold text-slate-600">{{ $info->company }}</span>
                                 </p>
                                 <p class="text-[11px] text-slate-400 mb-0.5">
                                     Email Address:
-                                    <span class="font-semibold text-slate-600">{{ $info['email'] }}</span>
+                                    <span class="font-semibold text-slate-600">{{ $info->email }}</span>
                                 </p>
                                 <p class="text-[11px] text-slate-400">
                                     VAT Number:
-                                    <span class="font-semibold text-slate-600">{{ $info['vat'] }}</span>
+                                    <span class="font-semibold text-slate-600">{{ $info->vat_number }}</span>
                                 </p>
                             </div>
                             <div class="flex flex-col items-end gap-2">
@@ -194,14 +166,15 @@
                     </div>
                 </div>
                 <div class="space-y-4 text-xs">
-                    @foreach ($transactions as $section => $items)
+                    @foreach ($groupedTransactions as $section => $items)
                         <div>
                             <p class="text-[11px] font-semibold text-slate-400 mb-2">{{ $section }}</p>
                             <div class="space-y-3">
                                 @foreach ($items as $tx)
                                     @php
-                                        $negative = $tx['negative'] ?? false;
+                                        $negative = $tx->is_negative ?? false;
                                         $color = $negative ? 'text-rose-500' : 'text-emerald-500';
+                                        $amount = $negative ? '- $' . number_format($tx->amount, 0) : '+ $' . number_format($tx->amount, 0);
                                     @endphp
                                     <div class="flex items-center justify-between">
                                         <div class="flex items-center gap-3">
@@ -209,11 +182,11 @@
                                                 {{ $negative ? '-' : '+' }}
                                             </span>
                                             <div>
-                                                <p class="font-semibold text-slate-700">{{ $tx['name'] }}</p>
-                                                <p class="text-[11px] text-slate-400">{{ $tx['date'] }}</p>
+                                                <p class="font-semibold text-slate-700">{{ $tx->name }}</p>
+                                                <p class="text-[11px] text-slate-400">{{ $tx->transaction_date->format('d F Y, h:i A') }}</p>
                                             </div>
                                         </div>
-                                        <span class="text-xs font-semibold {{ $color }}">{{ $tx['amount'] }}</span>
+                                        <span class="text-xs font-semibold {{ $color }}">{{ $amount }}</span>
                                     </div>
                                 @endforeach
                             </div>

@@ -45,4 +45,28 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the profile info for the user.
+     */
+    public function profileInfo()
+    {
+        return $this->hasOne(ProfileInfo::class);
+    }
+
+    /**
+     * Get the platform settings for the user.
+     */
+    public function platformSettings()
+    {
+        return $this->hasMany(PlatformSetting::class);
+    }
+
+    /**
+     * Get the conversations for the user.
+     */
+    public function conversations()
+    {
+        return $this->hasMany(Conversation::class);
+    }
 }

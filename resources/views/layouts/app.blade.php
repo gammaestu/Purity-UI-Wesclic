@@ -50,23 +50,25 @@
                     <div>
                         <p class="text-xs font-semibold text-slate-400 uppercase mb-3">Account pages</p>
                         <div class="space-y-3">
-                            <x-sidebar.nav-item :href="route('profile.index')" label="Profile" :active="request()->routeIs('profile.index')">
-                                <x-slot:icon>
-                                    <x-icons.user class="h-5 w-5"/>
-                                </x-slot:icon>
-                            </x-sidebar.nav-item>
+                            @auth
+                                <x-sidebar.nav-item :href="route('profile.index')" label="Profile" :active="request()->routeIs('profile.index')">
+                                    <x-slot:icon>
+                                        <x-icons.user class="h-5 w-5"/>
+                                    </x-slot:icon>
+                                </x-sidebar.nav-item>
+                            @else
+                                <x-sidebar.nav-item :href="route('auth.signin')" label="Sign In" :active="request()->routeIs('auth.signin')">
+                                    <x-slot:icon>
+                                        <x-icons.document class="h-5 w-5"/>
+                                    </x-slot:icon>
+                                </x-sidebar.nav-item>
 
-                            <x-sidebar.nav-item :href="route('auth.signin')" label="Sign In" :active="request()->routeIs('auth.signin')">
-                                <x-slot:icon>
-                                    <x-icons.document class="h-5 w-5"/>
-                                </x-slot:icon>
-                            </x-sidebar.nav-item>
-
-                            <x-sidebar.nav-item :href="route('auth.signup')" label="Sign Up" :active="request()->routeIs('auth.signup')">
-                                <x-slot:icon>
-                                    <x-icons.rocket class="h-5 w-5"/>
-                                </x-slot:icon>
-                            </x-sidebar.nav-item>
+                                <x-sidebar.nav-item :href="route('auth.signup')" label="Sign Up" :active="request()->routeIs('auth.signup')">
+                                    <x-slot:icon>
+                                        <x-icons.rocket class="h-5 w-5"/>
+                                    </x-slot:icon>
+                                </x-sidebar.nav-item>
+                            @endauth
                         </div>
                     </div>
 
@@ -105,10 +107,20 @@
                             />
                         </div>
                         <div class="flex items-center gap-3 pl-1">
-                            <a href="{{ route('auth.signin') }}" class="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 hover:text-slate-800">
-                                <x-icons.user class="h-4 w-4 text-slate-500" />
-                                <span>Sign In</span>
-                            </a>
+                            @auth
+                                <form action="{{ route('auth.logout') }}" method="POST" class="inline">
+                                    @csrf
+                                    <button type="submit" class="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 hover:text-slate-800">
+                                        <x-icons.user class="h-4 w-4 text-slate-500" />
+                                        <span>Logout</span>
+                                    </button>
+                                </form>
+                            @else
+                                <a href="{{ route('auth.signin') }}" class="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 hover:text-slate-800">
+                                    <x-icons.user class="h-4 w-4 text-slate-500" />
+                                    <span>Sign In</span>
+                                </a>
+                            @endauth
 
                             <button type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100">
                                 <x-icons.settings class="h-5 w-5" />

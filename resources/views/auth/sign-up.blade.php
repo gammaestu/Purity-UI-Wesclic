@@ -61,13 +61,27 @@
                     or
                 </div>
 
-                <form action="#" method="post" class="mt-6 space-y-4">
+                <form action="{{ route('auth.register') }}" method="post" class="mt-6 space-y-4">
                     @csrf
+
+                    @if ($errors->any())
+                        <div class="rounded-xl bg-rose-50 border border-rose-200 px-4 py-3 text-xs text-rose-600">
+                            <ul class="list-disc list-inside">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 mb-2">Name</label>
                         <input
                             type="text"
+                            name="name"
+                            value="{{ old('name') }}"
                             placeholder="Your full name"
+                            required
                             class="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-xs text-slate-700 placeholder:text-slate-300 outline-none focus:border-[#4FD1C5]"
                         />
                     </div>
@@ -76,7 +90,10 @@
                         <label class="block text-xs font-semibold text-slate-600 mb-2">Email</label>
                         <input
                             type="email"
+                            name="email"
+                            value="{{ old('email') }}"
                             placeholder="Your email address"
+                            required
                             class="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-xs text-slate-700 placeholder:text-slate-300 outline-none focus:border-[#4FD1C5]"
                         />
                     </div>
@@ -85,20 +102,27 @@
                         <label class="block text-xs font-semibold text-slate-600 mb-2">Password</label>
                         <input
                             type="password"
+                            name="password"
                             placeholder="Your password"
+                            required
+                            minlength="8"
                             class="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-xs text-slate-700 placeholder:text-slate-300 outline-none focus:border-[#4FD1C5]"
                         />
                     </div>
 
-                    <label class="flex items-center gap-3 pt-1 cursor-pointer select-none">
-                        <span class="relative inline-flex h-5 w-10 items-center rounded-full bg-[#4FD1C5] shadow-inner">
-                            <input type="checkbox" class="peer sr-only" checked>
-                            <span class="absolute left-0.5 top-0.5 h-4 w-4 rounded-full bg-white shadow-sm transition peer-checked:translate-x-5"></span>
-                        </span>
-                        <span class="text-[11px] text-slate-500">Remember me</span>
-                    </label>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 mb-2">Confirm Password</label>
+                        <input
+                            type="password"
+                            name="password_confirmation"
+                            placeholder="Confirm your password"
+                            required
+                            minlength="8"
+                            class="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-xs text-slate-700 placeholder:text-slate-300 outline-none focus:border-[#4FD1C5]"
+                        />
+                    </div>
 
-                    <button type="button" class="w-full rounded-xl bg-[#4FD1C5] text-white text-xs font-semibold py-3 tracking-wide shadow-sm hover:brightness-95">
+                    <button type="submit" class="w-full rounded-xl bg-[#4FD1C5] text-white text-xs font-semibold py-3 tracking-wide shadow-sm hover:brightness-95">
                         SIGN UP
                     </button>
 
@@ -113,12 +137,15 @@
         {{-- Footer --}}
         <footer class="mt-auto pb-10 pt-20">
             <div class="mx-auto max-w-6xl px-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between text-[11px] text-slate-400">
-                <span>© 2021, Made with ♥ by Creative Tim &amp; Simmmple for a better web</span>
+                <span>
+                        @ 2026, Made with
+                        <span class="mx-1 text-rose-500">♥</span>
+                        by
+                        <span class="font-semibold text-[#4FD1C5]">Gamma Estu Mahardika</span>
+                    </span>
                 <div class="flex items-center gap-5">
-                    <a href="#" class="hover:text-slate-600">Creative Tim</a>
-                    <a href="#" class="hover:text-slate-600">Simmmple</a>
-                    <a href="#" class="hover:text-slate-600">Blog</a>
-                    <a href="#" class="hover:text-slate-600">License</a>
+                    <a href="{{ route('dashboard.index') }}" class="hover:text-slate-600">Dashboard</a>
+                    <a href="{{ route('profile.index') }}" class="hover:text-slate-600">Profile</a>
                 </div>
             </div>
         </footer>

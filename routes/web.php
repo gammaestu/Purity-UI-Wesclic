@@ -13,21 +13,20 @@ use App\Http\Controllers\AuthController;
 |--------------------------------------------------------------------------
 */
 
-// Default URL mengarah ke halaman Sign Up (UI only, tanpa backend auth)
-Route::get('/', [AuthController::class, 'signUp'])->name('auth.signup');
+// Authentication Routes (Public)
+Route::middleware('guest')->group(function () {
+    Route::get('/', [AuthController::class, 'signUp'])->name('auth.signup');
+    Route::get('/sign-in', [AuthController::class, 'signIn'])->name('auth.signin');
+    Route::get('/sign-up', [AuthController::class, 'signUp']);
+    Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
+});
 
-// Halaman dashboard utama (UI purity)
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-
-// Halaman tables (UI only)
-Route::get('/tables', [TablesController::class, 'index'])->name('tables.index');
-
-// Halaman billing (UI only)
-Route::get('/billing', [BillingController::class, 'index'])->name('billing.index');
-
-// Halaman profile (UI only)
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-
-// Halaman Login (UI only)
-Route::get('/sign-in', [AuthController::class, 'signIn'])->name('auth.signin');
-Route::get('/sign-up', [AuthController::class, 'signUp']);
+// Protected Routes (Require Authentication)
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/tables', [TablesController::class, 'index'])->name('tables.index');
+    Route::get('/billing', [BillingController::class, 'index'])->name('billing.index');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+});

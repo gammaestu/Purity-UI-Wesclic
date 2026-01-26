@@ -70,12 +70,15 @@
             {{-- Footer --}}
             <footer class="mt-10 pb-8">
                 <div class="mx-auto max-w-6xl px-6 text-xs text-slate-400 flex items-center justify-between">
-                    <span>© 2026, made with ♥ by Creative Tim &amp; Simmmple for a better web</span>
+                    <span>
+                        @ 2026, Made with
+                        <span class="mx-1 text-rose-500">♥</span>
+                        by
+                        <span class="font-semibold text-[#4FD1C5]">Gamma Estu Mahardika</span>
+                    </span>
                     <div class="space-x-6">
-                        <a href="#" class="hover:text-slate-600">Creative Tim</a>
-                        <a href="#" class="hover:text-slate-600">Simmmple</a>
-                        <a href="#" class="hover:text-slate-600">Blog</a>
-                        <a href="#" class="hover:text-slate-600">License</a>
+                        <a href="{{ route('dashboard.index') }}" class="hover:text-slate-600">Dashboard</a>
+                        <a href="{{ route('profile.index') }}" class="hover:text-slate-600">Profile</a>
                     </div>
                 </div>
             </footer>
